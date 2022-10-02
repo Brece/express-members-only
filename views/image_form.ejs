@@ -1,0 +1,17 @@
+<% include('./partials/_header') -%>
+
+<%= title %>
+
+<form
+    action="/api/image/create"
+    method="POST"
+    enctype="multipart/form-data"
+    class="c-form">
+    <div class="c-form__groups">
+        <label for="image">Image (< 300kb)</label>
+        <input type="file" id="image" name="image" required>
+    </div>
+    <button type="submit" class="c-btn c-btn-submit">Submit</button>
+</form>
+
+<% include('./partials/_footer') -%>

@@ -1,17 +1,32 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
+const session = require('express-session');
+const favicon = require('express-favicon')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const User = require('./models/UserModel');
 
-var app = express();
+require('dotenv').config();
+
+// database
+const connectDB = require('./database/connection');
+connectDB();
+
+
+const messageRouter = require('./routes/message');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,8 +34,56 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// authentication
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username' });
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match; log in user
+          return done(null, user);
+        } else {
+          // passwords do not match
+          return done(null, false, { message: 'Incorrect password' });
+        }
+      });
+    })
+  })
+);
+
+// session and serialization
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+// initializing
+app.use(passport.initialize());
+app.use(passport.session());
+
+/**
+ * use "locals" object to store information that is accessable throughout the entire app
+ * place this between passport.initialize() and rendering the views and the currentUser variable is available in all views; you don't have to manually pass it into all of the controllers in which it is needed
+ */
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use('/', messageRouter);
+
+app.use(favicon('public/images/favicons/favicon.ico'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
