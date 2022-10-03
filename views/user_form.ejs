@@ -1,6 +1,82 @@
-<!-- TODO: use form for CREATE/UPDATE -->
 <% include('./partials/_header') -%>
 
+<!-- TODO: re-use for UPDATE user -->
+<h1><%= title %></h1>
+<form
+    action=""
+    method="POST"
+    class="c-form">
+    <div class="c-form__groups">
+        <label for="firstname">First Name</label>
+        <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            value="<%= user ? user.firstname : '' %>"
+            maxlength="100"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="lastname">Last Name</label>
+        <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            value="<%= user ? user.lastname : '' %>"
+            maxlength="100"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="email">Email</label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            value="<%= user ? user.email : '' %>"
+            maxlength="100"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="password">Password (between 4 and 16 characters)</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="confirmPassword">Confirm Your Password</label>
+        <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="color">Pick Your Color</label>
+        <input
+            type="color"
+            id="color"
+            name="color"
+            value="<%= user ? user.color : '' %>"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="image">Pick Your Profile Image</label>
+        <select name="image" id="image" size="0" required>
+            <% if (image_list.length > 0) { %>
+                <% image_list.forEach((image) => { %>
+                    <option
+                        value="<%= image._id %>"
+                        <%= image.selected ? 'selected' : '' %>>
+                            <%= image.file.name %>
+                    </option>
+                <% }) %>
+            <% } %>
+        </select>
+    </div>
 
+    <button type="submit">Sign Up</button>
+</form>
 
 <% include('./partials/_footer') -%>

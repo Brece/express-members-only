@@ -31,10 +31,8 @@ router.get('/sign-up', signup.render);
 router.get('/api/image/create', image_controller.image_create_get);
 router.post('/api/image/create', upload.single('image'),image_controller.image_create_post);
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
-});
+// User
+router.get('/api/user/sign-up', user_controller.user_create_get);
+router.post('/api/user/sign-up', user_controller.user_create_post);
 
 module.exports = router;
