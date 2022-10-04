@@ -14,6 +14,7 @@ const upload = multer({
 const user_controller = require('../controllers/userController');
 const image_controller = require('../controllers/imageController');
 const message_controller = require('../controllers/messageController');
+const status_controller = require('../controllers/statusController');
 
 // rendering services
 const index = require('../services/index_render');
@@ -34,5 +35,9 @@ router.post('/api/image/create', upload.single('image'),image_controller.image_c
 // User
 router.get('/api/user/sign-up', user_controller.user_create_get);
 router.post('/api/user/sign-up', user_controller.user_create_post);
+
+// Status
+router.get('/api/status/:id', status_controller.status_update_get);
+router.post('/api/status/:id', status_controller.status_update_post);
 
 module.exports = router;

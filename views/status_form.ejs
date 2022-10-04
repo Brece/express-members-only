@@ -1,0 +1,25 @@
+<% include('./partials/_header') -%>
+<h1><%= title %></h1>
+<form
+    action="/api/status/<%= user._id %>"
+    method="POST"
+    class="c-form">
+    <input type="hidden" name="userid" value="<%= user._id %>">
+    <div class="c-form__groups">
+        <label for="vip">What the secret password? 🤫</label>
+        <input type="text" id="vip" name="vip" placeholder="Name of Spongebob's pet">
+    </div>
+    <button type="submit" class="c-btn c-btn--submit">Become VIP</button>
+</form>
+
+<% if(errors) { %>
+    <div class="c-errors">
+        <% errors.forEach(function (err, index) { %>
+            <div>
+                <p class="text-danger">Error Message: <%= err.msg %></p>
+            </div>
+        <% }) %> 
+    </div>
+<% } %> 
+
+<% include('./partials/_footer') -%>
