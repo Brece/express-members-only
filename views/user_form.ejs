@@ -2,8 +2,11 @@
 
 <!-- TODO: re-use for UPDATE user -->
 <h1><%= title %></h1>
+
+<%- include('./partials/_messages', { errors }) %>
+
 <form
-    action=""
+    action="/user/signup"
     method="POST"
     class="c-form">
     <div class="c-form__groups">
@@ -79,6 +82,7 @@
     <button type="submit">Sign Up</button>
 </form>
 
+<!-- TODO: cleanup error output for production -->
 <% if(errors) { %>
     <div class="c-errors">
         <% errors.forEach(function (err, index) { %>

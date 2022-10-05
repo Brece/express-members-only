@@ -26,6 +26,6 @@ exports.image_create_post = (req, res, next) => {
             return next(err);
         }
 
-        res.redirect('/api/image/create');
+        res.redirect('/image/create');
     });
 }

@@ -4,9 +4,9 @@ const Image = require('../models/ImageModel');
 const async = require('async');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 
-exports.user_create_get = (req, res, next) => {
+// SIGN UP
+exports.user_signup_get = (req, res, next) => {
     Image.find({}, (err, image_list) => {
         if (err) return next(err);
 
@@ -20,7 +20,8 @@ exports.user_create_get = (req, res, next) => {
 }
 
 // TODO: check for color and image id
-exports.user_create_post = [
+// TODO: get rid of database check if email is in use; passport should handle those cases
+exports.user_signup_post = [
     // validation and sanitization
     body('firstname', 'First name is required')
         .trim()
@@ -39,7 +40,7 @@ exports.user_create_post = [
             try {
                 const user = await User.findOne({ email: value }, 'email');
                 if (user) {
-                    return Promise.reject('The email address is already in use');
+                    return Promise.reject('The email address is already registered');
                 }
                 return true;
             } catch (err) {
@@ -66,6 +67,8 @@ exports.user_create_post = [
 
         // catching validation errors
         const errors = validationResult(req);
+
+        console.log(errors)
 
         if (!errors.isEmpty()) {
             // there are errors; re-render form with given input values
@@ -99,30 +102,28 @@ exports.user_create_post = [
             user.save((err) => {
                 if (err) return next(err);
                 
-                res.redirect(user.url);
+                req.flash('success_msg', 'You are now registered and can log in');
+                res.redirect('/user/login');
             });
         });
     }
 ];
 
+// LOG IN
+exports.user_login_get = (req, res, next) => {
+    res.render('login_form', {
+        title: 'Log In',
+        user: false,
+        errors: false,
+    });
+}
+
 exports.user_login_post = [
-    body('email')
+    body('email', 'Please provide a valid email address')
         .trim()
         .escape()
         .isEmail()
-        .normalizeEmail()
-        .withMessage('Please provide a valid email address')
-        .custom( async (value) => {
-            try {
-                const user = await User.findOne({ email: value }, 'email');
-                if (user) {
-                    return true;
-                }
-                return Promise.reject('The email address is not registered');
-            } catch (err) {
-                throw new Error(err);
-            }
-        }),
+        .normalizeEmail(),
     body('password')
         .trim()
         .isLength({ min: 1 })
@@ -133,5 +134,16 @@ exports.user_login_post = [
         const errors = validationResult(req);
 
         console.log(req);
+        res.send('login post xxx');
     }
 ]
+
+// LOG OUT
+exports.user_logout_get = (req, res, next) => {
+    req.logout((err) => {
+        if (err) return next(err);
+        
+        res.flash('success_msg', 'You are successfully logged out');
+        res.redirect('/user/login');
+    });
+}

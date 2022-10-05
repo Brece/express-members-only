@@ -3,8 +3,10 @@
 
 <h1><%= title %></h1>
 
+<%- include('./partials/_messages') %>
+
 <form
-    action="/api/user/log-in"
+    action="/user/login"
     method="POST"
     class="c-form">
     <div class="c-form__groups">

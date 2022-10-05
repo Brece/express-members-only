@@ -1,24 +1,24 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
 const session = require('express-session');
-const favicon = require('express-favicon')
+const flash = require('connect-flash');
+const favicon = require('express-favicon');
 
-const User = require('./models/UserModel');
-
-require('dotenv').config();
+// passport config
+const passport = require('passport');
+require('./config/passport')(passport);
 
 // database
 const connectDB = require('./database/connection');
 connectDB();
 
-
-const messageRouter = require('./routes/message');
+const userRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 
 const app = express();
 
@@ -27,7 +27,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Express session
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'only cats',
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(passport.authenticate('session'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -35,43 +40,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// authentication
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username' });
-      }
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
-          // passwords match; log in user
-          return done(null, user);
-        } else {
-          // passwords do not match
-          return done(null, false, { message: 'Incorrect password' });
-        }
-      });
-    })
-  })
-);
-
-// session and serialization
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
-// initializing
+// passport middlewares: initializing
 app.use(passport.initialize());
 app.use(passport.session());
+
+// connect flash
+app.use(flash());
 
 /**
  * use "locals" object to store information that is accessable throughout the entire app
@@ -79,10 +53,13 @@ app.use(passport.session());
  */
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
   next();
 });
 
-app.use('/', messageRouter);
+app.use('/', indexRouter);
+app.use('/user', userRouter);
 
 app.use(favicon('public/images/favicons/favicon.ico'));
 
