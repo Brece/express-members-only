@@ -567,11 +567,6 @@ video {
   flex-direction: column;
 }
 
-.bg-danger {
-  --tw-bg-opacity: 1;
-  background-color: rgb(230 87 92 / var(--tw-bg-opacity));
-}
-
 .text-danger {
   --tw-text-opacity: 1;
   color: rgb(230 87 92 / var(--tw-text-opacity));

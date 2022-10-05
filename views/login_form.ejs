@@ -1,6 +1,30 @@
 <!-- TODO: re-use for login and DELETE account -->
 <%- include('./partials/_header') %>
 
+<h1><%= title %></h1>
 
+<form
+    action="/api/user/log-in"
+    method="POST"
+    class="c-form">
+    <div class="c-form__groups">
+        <label for="email">Email</label>
+        <input
+            type="email"
+            name="email"
+            id="email"
+            value="<%= user ? user.email : '' %>"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="password">Password</label>
+        <input
+            type="password"
+            name="password"
+            id="password"
+            required>
+    </div>
+    <button type="submit">Log In</button>
+</form>
 
 <%- include('./partials/_footer') %>

@@ -35,6 +35,8 @@ router.post('/api/image/create', upload.single('image'),image_controller.image_c
 // User
 router.get('/api/user/sign-up', user_controller.user_create_get);
 router.post('/api/user/sign-up', user_controller.user_create_post);
+router.post('/api/user/log-in', user_controller.user_login_post);
+
 
 // Status
 router.get('/api/status/:id', status_controller.status_update_get);

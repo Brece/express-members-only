@@ -26,6 +26,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Express session
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 
 app.use(logger('dev'));

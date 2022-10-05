@@ -4,6 +4,7 @@ const Image = require('../models/ImageModel');
 const async = require('async');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 exports.user_create_get = (req, res, next) => {
     Image.find({}, (err, image_list) => {
@@ -32,6 +33,7 @@ exports.user_create_post = [
     body('email')
         .trim()
         .isEmail()
+        .normalizeEmail()
         .withMessage('Please provide a valid email address')
         .custom( async (value) => {
             try {
@@ -102,3 +104,34 @@ exports.user_create_post = [
         });
     }
 ];
+
+exports.user_login_post = [
+    body('email')
+        .trim()
+        .escape()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage('Please provide a valid email address')
+        .custom( async (value) => {
+            try {
+                const user = await User.findOne({ email: value }, 'email');
+                if (user) {
+                    return true;
+                }
+                return Promise.reject('The email address is not registered');
+            } catch (err) {
+                throw new Error(err);
+            }
+        }),
+    body('password')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage('Password is required'),
+    (req, res, next) => {
+        // catching validation errors
+        const errors = validationResult(req);
+
+        console.log(req);
+    }
+]

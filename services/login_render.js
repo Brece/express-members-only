@@ -1,3 +1,6 @@
 exports.render = (req, res, next) => {
-    res.send('login xxx')
+    res.render('login_form', {
+        title: 'Log In',
+        user: false,
+    });
 }
