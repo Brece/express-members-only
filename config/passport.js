@@ -7,7 +7,11 @@ const User = require('../models/UserModel');
 module.exports = (passport) => {
     // authentication
     passport.use(
-        new LocalStrategy((email, password, done) => {
+        new LocalStrategy({
+            usernameField: 'email',
+            passwordField: 'password',
+            },
+            (email, password, done) => {
             User.findOne({ email: email }, (err, user) => {
                 if (err) {
                     return done(err);

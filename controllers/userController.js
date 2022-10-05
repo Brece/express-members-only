@@ -68,8 +68,6 @@ exports.user_signup_post = [
         // catching validation errors
         const errors = validationResult(req);
 
-        console.log(errors)
-
         if (!errors.isEmpty()) {
             // there are errors; re-render form with given input values
             Image.find({}, (err, image_list) => {
@@ -118,6 +116,8 @@ exports.user_login_get = (req, res, next) => {
     });
 }
 
+// TODO: clean up; might not be used
+/*
 exports.user_login_post = [
     body('email', 'Please provide a valid email address')
         .trim()
@@ -129,14 +129,17 @@ exports.user_login_post = [
         .isLength({ min: 1 })
         .escape()
         .withMessage('Password is required'),
+    
     (req, res, next) => {
         // catching validation errors
         const errors = validationResult(req);
 
-        console.log(req);
+        console.log('login post running');
+
         res.send('login post xxx');
     }
 ]
+*/
 
 // LOG OUT
 exports.user_logout_get = (req, res, next) => {

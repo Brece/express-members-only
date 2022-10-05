@@ -1,6 +1,15 @@
 <% if (errors) { %>
     <div class="c-error-message">
-        <%= errors[0].msg %>
+        <p><%= errors[0].msg %></p>
+        <button type="button" class="c-btn c-btn--close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+<% } %>
+
+<% if (success_msg.length !== 0) { %>
+    <div class="c-error-message">
+        <p><%= success_msg[0].msg %></p>
         <button type="button" class="c-btn c-btn--close">
             <i class="fa-solid fa-xmark"></i>
         </button>

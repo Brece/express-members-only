@@ -27,12 +27,10 @@ router.post('/image/create', upload.single('image'),image_controller.image_creat
 router.get('/signup', user_controller.user_signup_get);
 router.post('/signup', user_controller.user_signup_post);
 router.get('/login', user_controller.user_login_get);
-router.post('/login',
-	passport.authenticate('local', {
-		successRedirect: '/',
-		failureRedirect: '/user/login',
-	}),
-	user_controller.user_login_post);
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/user/login',
+}));
 router.get('/:id/logout', user_controller.user_logout_get);
 router.get('/:id/status', ensureAuthenticated, status_controller.status_update_get);
 router.post('/:id/status', status_controller.status_update_post);
