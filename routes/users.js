@@ -34,9 +34,10 @@ router.post('/login', passport.authenticate('local', {
 router.get('/:id/logout', user_controller.user_logout_get);
 router.get('/:id/status', ensureAuthenticated, status_controller.status_update_get);
 router.post('/:id/status', status_controller.status_update_post);
-// router.get('/:id/update', ensureAuthenticated, user_controller.user_update_get);
-// router.post('/:id/update', ensureAuthenticated, user_controller.user_update_post);
-// router.get('/:id', ensureAuthenticated, user_controller.user_detail_get);
+
+router.get('/:id/update', ensureAuthenticated, user_controller.user_update_get);
+router.post('/:id/update', ensureAuthenticated, user_controller.user_update_post);
+router.get('/:id', ensureAuthenticated, user_controller.user_detail_get);
 
 // Message
 

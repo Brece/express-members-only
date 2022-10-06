@@ -6,7 +6,7 @@
 <%- include('./partials/_messages', { errors }) %>
 
 <form
-    action="/user/signup"
+    action="<%= update ? `/user/${user._id}/update` : '/user/signup' %>"
     method="POST"
     class="c-form">
     <div class="c-form__groups">
@@ -29,16 +29,25 @@
             maxlength="100"
             required>
     </div>
-    <div class="c-form__groups">
-        <label for="email">Email</label>
-        <input
+    <% if (!update) { %>
+        <div class="c-form__groups">
+            <label for="email">Email</label>
+            <input
             type="email"
             id="email"
             name="email"
             value="<%= user ? user.email : '' %>"
             maxlength="100"
             required>
-    </div>
+        </div>
+    <% } else { %>
+        <div class="c-form__groups">
+            <label>Email</label>
+            <p><%= user.email %></p>
+        </div>
+        <input type="hidden" name="userid" value="<%= user._id %>">
+        <input type="hidden" name="status" value="<%= user.status %>">
+    <% } %>
     <div class="c-form__groups">
         <label for="password">Password (between 4 and 16 characters)</label>
         <input
@@ -79,7 +88,7 @@
         </select>
     </div>
 
-    <button type="submit">Sign Up</button>
+    <button type="submit"><%= update ? 'Update' : 'Sign Up' %></button>
 </form>
 
 <!-- TODO: cleanup error output for production -->
