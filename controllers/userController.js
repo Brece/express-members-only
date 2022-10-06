@@ -8,7 +8,22 @@ const bcrypt = require('bcryptjs');
 //  User detail
 // TODO:
 exports.user_detail_get = (req, res, next) => {
-    res.render('user detail get xxx')
+    User.findById(req.params.id)
+        .populate('image')
+        .exec((err, user) => {
+            if (err) return next(err);
+
+            if (user === null) {
+                const err = new Error('User not found');
+                err.status = 404;
+                return next(err);
+            }
+
+            res.render('user_detail', {
+                title: 'My Profile',
+                user,
+            });
+    });
 }
 
 // SIGN UP

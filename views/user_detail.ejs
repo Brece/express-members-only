@@ -1,0 +1,17 @@
+<%- include('partials/_header') %>
+
+<h1><%= title %></h1>
+<p>Name: <%= `${user.firstname} ${user.lastname}` %></p>
+<p>Email: <%= user.email %></p>
+<p>Status: <%= user.status ? 'VIP' : 'Standard' %></p>
+<img
+    src="data:<%= user.image.file.contentType %>;base64,
+    <%= user.image.file.data.toString('base64') %>"
+    alt="<%= user.image.file.name %>"
+    class="">
+<div>
+    <p>Color: <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
+</div>
+
+
+<%- include('partials/_footer') %>
