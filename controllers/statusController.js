@@ -6,6 +6,12 @@ exports.status_update_get = (req, res, next) => {
         .exec((err, user) => {
             if (err) return next(err);
 
+            if (user === null) {
+                const err = new Error('User not found');
+                err.status = 404;
+                return next(err);
+            }
+            
             res.render('status_form', {
                 title: '💎 VIP Area 💎',
                 user,

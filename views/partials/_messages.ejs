@@ -1,17 +1,21 @@
 <% if (errors) { %>
-    <div class="c-error-message">
-        <p><%= errors[0].msg %></p>
-        <button type="button" class="c-btn c-btn--close">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
+    <% for (const error of errors) { %>
+        <div class="c-error-message">
+            <p><%= error.msg %></p>
+            <button type="button" class="c-btn c-btn--close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    <% } %>
 <% } %>
 
 <% if (success_msg.length !== 0) { %>
-    <div class="c-error-message">
-        <p><%= success_msg[0].msg %></p>
-        <button type="button" class="c-btn c-btn--close">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
+    <% for (const message of success_msg) { %>
+        <div class="c-error-message">
+            <p><%= message %></p>
+            <button type="button" class="c-btn c-btn--close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    <% } %>
 <% } %>

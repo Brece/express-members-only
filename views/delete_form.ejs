@@ -1,0 +1,63 @@
+<%- include('./partials/_header') %>
+
+<h1><%= title %></h1>
+
+<%- include('./partials/_messages', { errors }) %>
+
+<form
+    action="/user/<%= user._id %>/delete"
+    method="POST"
+    class="c-form">
+    <div class="c-form__groups">
+        <h3>Please type in Your email address and confirm the password in order to delete Your account.</h3>
+    </div>
+    <input type="hidden" name="userid" value="<%= user._id %>">
+    <input type="hidden" name="url" value="<%= user.url %>">
+    <div class="c-form__groups">
+        <label for="email">Email</label>
+        <input
+        type="email"
+        id="email"
+        name="email"
+        maxlength="100"
+        required>
+    </div>
+    <div class="c-form__groups">
+        <label for="password">Password (between 4 and 16 characters)</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            required>
+    </div>
+    <div class="c-form__groups">
+        <label for="confirmPassword">Confirm Your Password</label>
+        <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required>
+    </div>
+
+    <div class="c-form__groups">
+        <button type="submit" class="c-btn c-btn--danger">Delete Account</button>
+        <button type="button" class="c-btn c-btn--cancel">
+            <a href="<%= user.url %>">Cancel</a>
+        </button>
+    </div>
+</form>
+
+<!-- TODO: cleanup error output for production -->
+<% if(errors) { %>
+    <div class="c-errors">
+        <% errors.forEach(function (err, index) { %>
+            <div>
+                <h4>Error #<%= index + 1 %></h4>
+                <p>Error Message: <%= err.msg %></p>
+                <p>Parameter: <%= err.param %></p>
+            </div>
+        <% }) %> 
+    </div>
+<% } %> 
+
+<%- include('./partials/_footer') %>

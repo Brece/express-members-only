@@ -171,7 +171,6 @@ exports.user_update_get = (req, res, next) => {
     );
 }
 
-// TODO:
 exports.user_update_post = [
     // validation and sanitization
     body('firstname', 'First name is required')
@@ -262,6 +261,102 @@ exports.user_update_post = [
     }
 ];
 
+// DELETE
+exports.user_delete_get = (req, res, next) => {
+    User.findById(req.params.id)
+        .exec((err, user) => {
+            if (err) return next(err);
+
+            if (user === null) {
+                const err = new Error('User not found');
+                err.status = 404;
+                return next(err);
+            }
+
+            res.render('delete_form', {
+                title: 'Delete Account',
+                user,
+                errors: false,
+        });
+    });
+}
+
+// TODO: manually change isAuthenticated to false after delete?
+exports.user_delete_post = [
+    // validation and sanitization
+    body('email')
+        .trim()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage('Please provide a valid email address')
+        .custom( async (value, { req }) => {
+            try {
+                const user = await User.findOne({ _id: req.body.userid, email: value }, 'email');
+                if (user) {
+                    return true;
+                }
+                return Promise.reject(`The email address doesn't belong to this account`);
+            } catch (err) {
+                throw new Error(err);
+            }
+        }),
+    body('password')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage('Password is required')
+        .custom( async (value, { req }) => {
+            try {
+                const user = await User.findById(req.body.userid);
+                const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+                if (validPassword) {
+                    return true;
+                } else {
+                    return Promise.reject(`Wrong password`);
+                }
+            } catch (err) {
+                throw new Error(err);
+            }
+        }),
+    body('confirmPassword', 'ConfirmPassword field value must match with with Password field value')
+        .trim()
+        .escape()
+        .custom((value, { req }) => value === req.body.password),
+    (req, res, next) => {
+        const user = new User({
+            _id: req.body.userid,
+            url: req.body.url,
+        });
+
+        // catching validation errors
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            // there are arrors; re-render form again
+            res.render('delete_form', {
+                title: 'Delete Account',
+                errors: errors.array(),
+                user,
+            });
+            return;
+        }
+
+        // data is valid; delete document
+        User.findByIdAndRemove(req.body.userid, (err) => {
+            if (err) return next(err);
+
+            // clear session.passport with help of logout() method; flash messages still work
+            req.logout((err) => {
+                if (err) return next(err);
+
+                req.flash('success_msg', 'Your account has been deleted successfully');
+                res.redirect('/user/signup');
+            })
+        });
+    }
+]
+
 // LOG IN
 exports.user_login_get = (req, res, next) => {
     res.render('login_form', {
@@ -276,7 +371,7 @@ exports.user_logout_get = (req, res, next) => {
     req.logout((err) => {
         if (err) return next(err);
         
-        res.flash('success_msg', 'You are successfully logged out');
+        req.flash('success_msg', 'You are successfully logged out');
         res.redirect('/user/login');
     });
 }
