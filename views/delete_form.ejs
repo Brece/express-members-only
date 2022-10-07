@@ -2,18 +2,18 @@
 
 <h1><%= title %></h1>
 
-<%- include('./partials/_messages', { errors }) %>
+<%- include('./partials/_hint_messages', { errors }) %>
 
 <form
     action="/user/<%= user._id %>/delete"
     method="POST"
     class="c-form">
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <h3>Please type in Your email address and confirm the password in order to delete Your account.</h3>
     </div>
     <input type="hidden" name="userid" value="<%= user._id %>">
     <input type="hidden" name="url" value="<%= user.url %>">
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="email">Email</label>
         <input
         type="email"
@@ -22,7 +22,7 @@
         maxlength="100"
         required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="password">Password (between 4 and 16 characters)</label>
         <input
             type="password"
@@ -30,7 +30,7 @@
             name="password"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="confirmPassword">Confirm Your Password</label>
         <input
             type="password"
@@ -39,8 +39,8 @@
             required>
     </div>
 
-    <div class="c-form__groups">
-        <button type="submit" class="c-btn c-btn--danger">Delete Account</button>
+    <div class="c-form__group">
+        <button type="submit" class="c-btn c-btn--delete">Delete Account</button>
         <button type="button" class="c-btn c-btn--cancel">
             <a href="<%= user.url %>">Cancel</a>
         </button>

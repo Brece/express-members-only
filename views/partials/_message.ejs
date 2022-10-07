@@ -1,0 +1,20 @@
+<!-- TODO: add delete button -->
+
+<% if (message_list.length > 0) { %>
+    <% for (const message of message_list) { %>
+        <div class="c-message">
+            <p><%= message.title %></p>
+            <p><%= message.text %></p>
+            <p><%= message.user.fullname %></p>
+            <p><%= message.createdAt_formatted %></p>
+
+            <% if (message.user.image.file !== undefined) { %>
+                <img
+                src="data:<%= message.user.image.file.contentType %>;base64,
+                <%= message.user.image.file.data.toString('base64') %>"
+                alt="<%= message.user.image.file.name %>"
+                class="">
+            <% } %>
+        </div>
+    <% } %> 
+<% } %> 

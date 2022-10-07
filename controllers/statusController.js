@@ -45,6 +45,12 @@ exports.status_update_post = [
         User.findByIdAndUpdate(req.body.userid, { status: true }, {}, (err, user) => {
             if (err) return next(err);
 
+            if (user === null) {
+                const err = new Error('User not found');
+                err.status = 404;
+                return next(err);
+            }
+
             res.redirect(user.url);
         });
     }

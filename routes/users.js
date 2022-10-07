@@ -42,5 +42,10 @@ router.post('/:id/delete', ensureAuthenticated, user_controller.user_delete_post
 router.get('/:id', ensureAuthenticated, user_controller.user_detail_get);
 
 // Message
+// TODO: protect routes
+router.post('/create-message', message_controller.message_create_post);
+router.get('/:id/delete-message', message_controller.message_delete_get);
+router.post('/:id/delete-message', message_controller.message_delete_post);
+
 
 module.exports = router;

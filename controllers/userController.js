@@ -1,29 +1,48 @@
 const User = require('../models/UserModel');
 const Image = require('../models/ImageModel');
+const Message = require('../models/MessageModel');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 //  User detail
-// TODO:
+// TODO: add message list that belongs to the user
 exports.user_detail_get = (req, res, next) => {
-    User.findById(req.params.id)
-        .populate('image')
-        .exec((err, user) => {
+    async.parallel(
+        {
+            user(callback) {
+                User.findById(req.params.id)
+                    .populate('image')
+                    .exec(callback);
+            },
+            message_list(callback) {
+                Message.find({})
+                .populate('user')
+                .exec(callback);
+            }
+        },
+        (err, results) => {
             if (err) return next(err);
 
-            if (user === null) {
-                const err = new Error('User not found');
-                err.status = 404;
-                return next(err);
+            // only display messages that belong to the user
+            let message_list = [];
+            for (const message of results.message_list) {
+                console.log(message.user);
+                if (req.params.id === message.user._id.toString()) {
+                    message_list.push(message);
+                }
             }
 
             res.render('user_detail', {
                 title: 'My Profile',
-                user,
+                user: results.user,
+                message_list,
+                message: false,
+                errors: false,
             });
-    });
+        }
+    );
 }
 
 // SIGN UP
@@ -140,7 +159,7 @@ exports.user_update_get = (req, res, next) => {
                     .exec(callback);
             },
             list_images(callback) {
-                Image.find().exec(callback);
+                Image.find({}).exec(callback);
             }
         },
         (err, results) => {
@@ -189,14 +208,13 @@ exports.user_update_post = [
         .trim()
         .escape()
         .custom((value, { req }) => value === req.body.password),
-    (req, res, next) => {
+    async (req, res, next) => {
         // create new user object
         const user = new User({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             color: req.body.color,
             image: req.body.image,
-            status: req.body.status,
             _id: req.body.userid,
         });
 
@@ -212,7 +230,7 @@ exports.user_update_post = [
                             .exec(callback);
                     },
                     list_images(callback) {
-                        Image.find().exec(callback);
+                        Image.find({}).exec(callback);
                     }
                 },
                 (err, results) => {
@@ -241,6 +259,11 @@ exports.user_update_post = [
         };
 
         // data is valid; save new document
+        // set status and admin
+        const userDB = await User.findById(req.body.userid);
+        user.status = userDB.status;
+        user.admin = userDB.admin;
+        
         // hash password
         bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
             if (err) return next(err);
@@ -281,7 +304,6 @@ exports.user_delete_get = (req, res, next) => {
     });
 }
 
-// TODO: manually change isAuthenticated to false after delete?
 exports.user_delete_post = [
     // validation and sanitization
     body('email')

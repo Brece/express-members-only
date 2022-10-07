@@ -551,6 +551,46 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.-top-96 {
+  top: -24rem;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.-right-5 {
+  right: -1.25rem;
+}
+
+.-top-5 {
+  top: -1.25rem;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.-z-50 {
+  z-index: -50;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -567,12 +607,46 @@ video {
   display: none;
 }
 
+.h-80 {
+  height: 20rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
 
+.max-w-md {
+  max-width: 28rem;
+}
+
+.-translate-x-2\/4 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-2\/4 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .text-3xl {
@@ -589,6 +663,32 @@ video {
   color: rgb(230 87 92 / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+.duration-100 {
+  transition-duration: 100ms;
+}
+
 @font-face {
   font-family: 'Montserrat';
 
@@ -600,9 +700,86 @@ video {
   font-family: 'Montserrat', sans-serif;
 }
 
+.c-btn {
+  margin-right: 20px;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  transition: all .1s ease-in-out;
+}
+
+.c-btn:hover {
+  opacity: .8;
+  scale: 1.05;
+}
+
+.c-btn--submit {
+  background-color: #d3a55f;
+}
+
+.c-btn--update {
+  background-color: #64b2fa;
+}
+
+.c-btn--delete {
+  background-color: #e6575c;
+}
+
+.c-btn--cancel {
+  margin-right: 0;
+  background-color: #828282;
+}
+
+.c-btn--close {
+  color: #e6575c;
+}
+
+.c-popup.isActive {
+  top: 50%;
+}
+
+.c-overlay.isActive {
+  bottom: 0;
+  z-index: 4;
+  opacity: .5;
+  background-color: #c5c5c5;
+}
+
+.c-form__group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start
+}
+
+.c-form__group label {
+  margin-bottom: 0.5rem;
+  flex: 1;
+  font-weight: 700;
+}
+
+.c-form__group input[type=text],
+.c-form__group input[type=password],
+.c-form__group input[type=email],
+.c-form__group input[type=password],
+.c-form__group select,
+.c-form__group textarea {
+  padding: 0.25rem;
+  outline: 1px solid #828282;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
 @media (min-width: 640px) {
   .sm\:mb-8 {
     margin-bottom: 2rem;
+  }
+
+  .sm\:max-w-xs {
+    max-width: 20rem;
   }
 
   .sm\:text-4xl {

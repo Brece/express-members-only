@@ -1,6 +1,6 @@
 <% if (errors) { %>
     <% for (const error of errors) { %>
-        <div class="c-error-message">
+        <div class="c-hint-message">
             <p><%= error.msg %></p>
             <button type="button" class="c-btn c-btn--close">
                 <i class="fa-solid fa-xmark"></i>
@@ -11,7 +11,7 @@
 
 <% if (success_msg.length !== 0) { %>
     <% for (const message of success_msg) { %>
-        <div class="c-error-message">
+        <div class="c-hint-message">
             <p><%= message %></p>
             <button type="button" class="c-btn c-btn--close">
                 <i class="fa-solid fa-xmark"></i>

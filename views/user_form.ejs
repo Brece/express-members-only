@@ -3,13 +3,13 @@
 <!-- TODO: re-use for UPDATE user -->
 <h1><%= title %></h1>
 
-<%- include('./partials/_messages', { errors }) %>
+<%- include('./partials/_hint_messages', { errors }) %>
 
 <form
     action="<%= update ? `/user/${user._id}/update` : '/user/signup' %>"
     method="POST"
     class="c-form">
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="firstname">First Name</label>
         <input
             type="text"
@@ -19,7 +19,7 @@
             maxlength="100"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="lastname">Last Name</label>
         <input
             type="text"
@@ -30,7 +30,7 @@
             required>
     </div>
     <% if (!update) { %>
-        <div class="c-form__groups">
+        <div class="c-form__group">
             <label for="email">Email</label>
             <input
             type="email"
@@ -41,14 +41,13 @@
             required>
         </div>
     <% } else { %>
-        <div class="c-form__groups">
+        <div class="c-form__group">
             <label>Email</label>
             <p><%= user.email %></p>
         </div>
         <input type="hidden" name="userid" value="<%= user._id %>">
-        <input type="hidden" name="status" value="<%= user.status %>">
     <% } %>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="password">Password (between 4 and 16 characters)</label>
         <input
             type="password"
@@ -56,7 +55,7 @@
             name="password"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="confirmPassword">Confirm Your Password</label>
         <input
             type="password"
@@ -64,7 +63,7 @@
             name="confirmPassword"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="color">Pick Your Color</label>
         <input
             type="color"
@@ -73,7 +72,7 @@
             value="<%= user ? user.color : '' %>"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="image">Pick Your Avatar</label>
         <select name="image" id="image" size="0" required>
             <% if (image_list.length > 0) { %>

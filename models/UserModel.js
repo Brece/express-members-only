@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     color: { type: String, default: '#ffffff' },
     status: { type: Boolean, default: false },
+    admin: { type: Boolean, default: false },
     image: { type: Schema.Types.ObjectId, ref: 'Image', required: true },
 });
 

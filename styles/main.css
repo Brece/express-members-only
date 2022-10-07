@@ -11,3 +11,68 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+
+.c-btn {
+    margin-right: 20px;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 14px;
+    transition: all .1s ease-in-out;
+}
+.c-btn:hover {
+    opacity: .8;
+    scale: 1.05;
+}
+.c-btn--submit {
+    background-color: #d3a55f;
+}
+.c-btn--update {
+    background-color: #64b2fa;
+}
+.c-btn--delete {
+    background-color: #e6575c;
+}
+.c-btn--cancel {
+    margin-right: 0;
+    background-color: #828282;
+}
+.c-btn--close {
+    color: #e6575c;
+}
+
+.c-popup.isActive {
+    top: 50%;
+}
+
+.c-overlay.isActive {
+    bottom: 0;
+    z-index: 4;
+    opacity: .5;
+    background-color: #c5c5c5;
+}
+
+.c-form__group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start
+}
+.c-form__group label {
+    margin-bottom: 0.5rem;
+    flex: 1;
+    font-weight: 700;
+}
+.c-form__group input[type=text],
+.c-form__group input[type=password],
+.c-form__group input[type=email],
+.c-form__group input[type=password],
+.c-form__group select,
+.c-form__group textarea {
+    padding: 0.25rem;
+    outline: 1px solid #828282;
+    border-radius: 3px;
+    background-color: #ffffff;
+}

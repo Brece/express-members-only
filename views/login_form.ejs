@@ -3,13 +3,13 @@
 
 <h1><%= title %></h1>
 
-<%- include('./partials/_messages') %>
+<%- include('./partials/_hint_messages') %>
 
 <form
     action="/user/login"
     method="POST"
     class="c-form">
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="email">Email</label>
         <input
             type="email"
@@ -18,7 +18,7 @@
             value="<%= user ? user.email : '' %>"
             required>
     </div>
-    <div class="c-form__groups">
+    <div class="c-form__group">
         <label for="password">Password</label>
         <input
             type="password"
