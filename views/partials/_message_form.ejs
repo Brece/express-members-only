@@ -1,33 +1,29 @@
 <!-- don't render when req.user is undefined; no user logged in-->
-<div id="c-popup" class="max-w-md sm:max-w-xs h-80 p-5 absolute z-50 -top-96 left-1/2 -translate-x-2/4 -translate-y-2/4 transition-all duration-1000 bg-white rounded-lg border-2 border-dark c-popup">
-    <h1><%= title %></h1>
-    <%- include('_hint_messages') %>
+<% if (user) { %>
+    <div class="c-message-form">
+        <h1><%= title %></h1>
+        <%- include('_hint_messages') %>
 
-    <form
-        action="/user/create-message"
-        method="POST"
-        class="c-form">
-        <div class="c-form__group">
-            <label for="title">Title</label>
-            <input
-                type="text"
-                name="title"
-                id="title"
-                value="<%= message ? message.title : '' %>"
-                required>
-        </div>
-        <div class="c-form__group">
-            <label for="text">Text</label>
-            <textarea name="text" id="text" required><%= message ? message.text : '' %></textarea>
-        </div>
-        <div class="c-form__group">
-            <button type="submit" class="c-btn c-btn--submit">Add Message</button>
-        </div>
-    </form>
-
-    <div id="closeBtn" class="absolute -right-5 -top-5 text-3xl text-danger cursor-pointer transition-colors duration-100 hover:text-danger2">
-        <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+        <form
+            action="/user/create-message"
+            method="POST"
+            class="c-form">
+            <div class="c-form__group">
+                <label for="title">Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    value="<%= message ? message.title : '' %>"
+                    required>
+            </div>
+            <div class="c-form__group">
+                <label for="text">Text</label>
+                <textarea name="text" id="text" maxlength="499" required><%= message ? message.text : '' %></textarea>
+            </div>
+            <div class="c-form__group">
+                <button type="submit" class="c-btn c-btn--submit">Add Message</button>
+            </div>
+        </form>
     </div>
-</div>
-
-<div class="absolute -z-50 top-0 left-0 right-0 opacity-0 c-overlay"></div>
+<% } %>

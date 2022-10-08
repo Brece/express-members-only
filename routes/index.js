@@ -27,6 +27,7 @@ router.get('/', (req, res, next) => {
         },
         (err, results) => {
             if (err) next(err);
+            console.log(results.user);
             // message list is an array of objects or an empty array if there are no messages in the database
             res.render('index', {
                 title: 'Members Only',

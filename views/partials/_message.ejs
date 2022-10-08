@@ -4,7 +4,7 @@
     <% for (const message of message_list) { %>
         <div class="c-message">
             <p><%= message.title %></p>
-            <p><%= message.text %></p>
+            <p><%- message.text %></p>
             <p><%= message.user.fullname %></p>
             <p><%= message.createdAt_formatted %></p>
 
