@@ -28,7 +28,7 @@ exports.message_create_post = [
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            // get path to render different templates
+            // get path to redirect to different routes
             const pathname = new URL(req.headers.referer).pathname;
 
             pathname === '/' 
@@ -39,7 +39,6 @@ exports.message_create_post = [
         
         // valid data; save document
         message.save((err) => {
-            console.log(message);
             if (err) return next(err);
 
             res.redirect('/');
@@ -48,10 +47,22 @@ exports.message_create_post = [
 ]
 
 // DELETE
-exports.message_delete_get = (req, res, next) => {
-    res.send('xxx');
-}
-
 exports.message_delete_post = (req, res, next) => {
-    res.send('xxx');
+    Message.findByIdAndRemove(req.body.messageid, (err, message) => {
+        if (err) return next(err);
+
+        if (message === null) {
+            const err = new Error('Message not found');
+            err.status = 404;
+            return next(err);
+        }
+
+        // get path to redirect to different routes
+        const pathname = new URL(req.headers.referer).pathname;
+
+        pathname === '/' 
+        ? res.redirect('/')
+        : res.redirect(`/user/${req.user._id.toString()}`);
+        return;
+    });
 }

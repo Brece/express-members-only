@@ -18,6 +18,7 @@ exports.user_detail_get = (req, res, next) => {
             },
             message_list(callback) {
                 Message.find({})
+                .sort({ 'createdAt': 'descending' })
                 .populate('user')
                 .exec(callback);
             }
@@ -28,7 +29,6 @@ exports.user_detail_get = (req, res, next) => {
             // only display messages that belong to the user
             let message_list = [];
             for (const message of results.message_list) {
-                console.log(message.user);
                 if (req.params.id === message.user._id.toString()) {
                     message_list.push(message);
                 }

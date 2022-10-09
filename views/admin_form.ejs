@@ -1,16 +1,16 @@
 <%- include('./partials/_header') %>
 
-<h1>💎 VIP Area 💎</h1>
+<h1>Become an Admin</h1>
 <form
-    action="/user/<%= user._id %>/status"
+    action="/user/<%= user._id %>/admin"
     method="POST"
     class="c-form">
     <input type="hidden" name="userid" value="<%= user._id %>">
     <div class="c-form__group">
-        <label for="status">What the secret password? 🤫</label>
-        <input type="text" id="status" name="status" placeholder="Name of Spongebob's pet">
+        <label for="status">Admin Password</label>
+        <input type="text" id="status" name="status" placeholder="It's a secret!">
     </div>
-    <button type="submit" class="c-btn c-btn--submit">Become VIP</button>
+    <button type="submit" class="c-btn c-btn--submit">Submit</button>
 </form>
 
 <% if(errors) { %>

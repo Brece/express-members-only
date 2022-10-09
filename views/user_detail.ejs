@@ -4,6 +4,7 @@
 <p>Name: <%= `${user.firstname} ${user.lastname}` %></p>
 <p>Email: <%= user.email %></p>
 <p>Status: <%= user.status ? 'VIP' : 'Standard' %></p>
+<p>Admin: <%= user.admin ? 'Yes' : 'No' %></p>
 <img
     src="data:<%= user.image.file.contentType %>;base64,
     <%= user.image.file.data.toString('base64') %>"
