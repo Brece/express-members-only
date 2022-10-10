@@ -1,9 +1,9 @@
 <% if (errors) { %>
     <% for (const error of errors) { %>
-        <div class="c-hint-message">
-            <p><%= error.msg %></p>
-            <button type="button" class="c-btn c-btn--close">
-                <i class="fa-solid fa-xmark"></i>
+        <div class="mb-1 px-1 py-1 bg-danger-light c-hint-message rounded relative c-hint-message">
+            <p class="mb-0 px-2 py-2 text-black"><%= error.msg %></p>
+            <button type="button" class="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 c-hint-message__close">
+                <i class="fa-solid fa-xmark text-2xl text-danger-dark"></i>
             </button>
         </div>
     <% } %>
@@ -11,10 +11,10 @@
 
 <% if (success_msg.length !== 0) { %>
     <% for (const message of success_msg) { %>
-        <div class="c-hint-message">
-            <p><%= message %></p>
-            <button type="button" class="c-btn c-btn--close">
-                <i class="fa-solid fa-xmark"></i>
+        <div class="mb-1 bg-success c-hint-message rounded relative c-hint-message">
+            <p class="mb-0 px-2 py-2 text-black"><%= message %></p>
+            <button type="button" class="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 c-hint-message__close">
+                <i class="fa-solid fa-xmark text-2xl text-danger-dark"></i>
             </button>
         </div>
     <% } %>

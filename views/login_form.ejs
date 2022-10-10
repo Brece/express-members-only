@@ -1,32 +1,34 @@
 <!-- TODO: re-use for login and DELETE account -->
 <%- include('./partials/_header') %>
 
-<h1><%= title %></h1>
+<div class="w-full sm:max-w-md sm:mx-auto c-user-form">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl mb-5 sm:mb-8 md:mb-10 font-bold"><%= title %></h1>
 
-<%- include('./partials/_hint_messages') %>
+    <%- include('./partials/_hint_messages') %>
 
-<form
-    action="/user/login"
-    method="POST"
-    class="c-form">
-    <div class="c-form__group">
-        <label for="email">Email</label>
-        <input
-            type="email"
-            name="email"
-            id="email"
-            value="<%= user ? user.email : '' %>"
-            required>
-    </div>
-    <div class="c-form__group">
-        <label for="password">Password</label>
-        <input
-            type="password"
-            name="password"
-            id="password"
-            required>
-    </div>
-    <button type="submit">Log In</button>
-</form>
+    <form
+        action="/user/login"
+        method="POST"
+        class="c-form">
+        <div class="c-form__group">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                value="<%= user ? user.email : '' %>"
+                required>
+        </div>
+        <div class="c-form__group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                name="password"
+                id="password"
+                required>
+        </div>
+        <button type="submit">Log In</button>
+    </form>
+</div>
 
 <%- include('./partials/_footer') %>

@@ -1,30 +1,11 @@
-const addBtn = document.querySelector('#addBtn');
-const closeBtn = document.querySelector('#closeBtn');
-const popup = document.querySelector('#c-popup');
-const deleteBtns = document.querySelectorAll('.c-btn--popup');
-const overlay = document.querySelector('.c-overlay');
+const closeBtns = document.querySelectorAll('.c-hint-message__close');
 
 
-if (addBtn !== null && closeBtn !== null) {
-    addBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        popup.classList.add('isActive');
-        overlay.classList.add('isActive');
-    });
-
-    closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        popup.classList.remove('isActive');
-        overlay.classList.remove('isActive');
-    });
-}
-
-if (deleteBtns !== null) {
-    deleteBtns.forEach((btn) => {
+if (closeBtns.length > 0) {
+    closeBtns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            popup.classList.add('isActive');
-            overlay.classList.add('isActive');
+            e.currentTarget.parentElement.style.display = 'none';
         });
     });
 }
