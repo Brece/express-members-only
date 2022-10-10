@@ -1,20 +1,28 @@
 <%- include('partials/_header') %>
 
-<h1><%= title %></h1>
-<p>Name: <%= `${user.firstname} ${user.lastname}` %></p>
-<p>Email: <%= user.email %></p>
-<p>Status: <%= user.status ? 'VIP' : 'Standard' %></p>
-<p>Admin: <%= adminStatus ? 'Yes' : 'No' %></p>
-<% if (!adminStatus) { %>
-    <a href="<%= user.url %>/admin">Become an Admin</a>
-<% } %> 
-<img
-    src="data:<%= user.image.file.contentType %>;base64,
-    <%= user.image.file.data.toString('base64') %>"
-    alt="<%= user.image.file.name %>"
-    class="">
-<div>
-    <p>Color: <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
+<div class="mb-10 pb-5 lg:mb-20 sm:mb-14 border-b-2 border-white c-user-detail">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl mb-5 sm:mb-8 md:mb-10 font-bold"><%= title %></h1>
+    <div class="flex flex-col-reverse sm:flex-row justify-between items-center">
+        <div class="w-full sm:w-3/5">
+            <p><strong>Name:</strong> <%= `${user.firstname} ${user.lastname}` %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Status:</strong> <%= user.status ? 'VIP' : 'Standard' %></p>
+            <p><strong>Admin:</strong> <%= adminStatus ? 'Yes' : 'No' %></p>
+            <p><strong>Color:</strong> <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
+            <% if (!adminStatus) { %>
+                <a href="<%= user.url %>/admin" class="c-btn c-btn--update">Become an Admin</a>
+            <% } %>
+        </div>
+
+        <div class="w-full sm:w-2/5 mb-5 sm:text-right">
+            <img
+                src="data:<%= user.image.file.contentType %>;base64,
+                <%= user.image.file.data.toString('base64') %>"
+                alt="<%= user.image.file.name %>"
+                class="w-20 h-20 sm:w-32 sm:h-32 rounded-full inline-block"
+                <%- `style="border: 1px solid ${user.color}"` %>>
+        </div>
+    </div>
 </div>
 
 <%- include('./partials/_message_form') %>

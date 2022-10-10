@@ -27,8 +27,11 @@ h2 {
     margin-bottom: 20px;
 }
 h3 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 16px;
+}
+p {
+    margin-bottom: 10px
 }
 
 /*
@@ -65,6 +68,7 @@ h3 {
 */
 
 .c-btn {
+    display: inline-block;
     margin-right: 20px;
     cursor: pointer;
     border: none;
@@ -79,10 +83,10 @@ h3 {
     scale: 1.05;
 }
 .c-btn--submit {
-    background-color: #d3a55f;
+    background-color: #00e5af;
 }
 .c-btn--update {
-    background-color: #64b2fa;
+    background-color: #3e003a;
 }
 .c-btn--delete {
     background-color: #e6575c;
@@ -90,20 +94,6 @@ h3 {
 .c-btn--cancel {
     margin-right: 0;
     background-color: #828282;
-}
-.c-btn--close {
-    color: #e6575c;
-}
-
-.c-popup.isActive {
-    top: 50%;
-}
-
-.c-overlay.isActive {
-    bottom: 0;
-    z-index: 4;
-    opacity: .5;
-    background-color: #c5c5c5;
 }
 
 .c-form__group {
@@ -132,6 +122,15 @@ h3 {
 }
 .c-form__group textarea {
     height: 100px;
+}
+
+/* =================== MEDIA QUERIES ===================== */
+
+@media (max-width: 640px) {
+    .c-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
 }
 
 @media screen and (prefers-reduced-motion) { 
