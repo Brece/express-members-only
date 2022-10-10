@@ -1,94 +1,95 @@
 <%- include('./partials/_header') %>
 
-<!-- TODO: re-use for UPDATE user -->
-<h1><%= title %></h1>
+<div class="w-full sm:max-w-md sm:mx-auto c-user-form">
+    <h1  class="text-3xl sm:text-4xl md:text-5xl mb-5 sm:mb-8 md:mb-10 font-bold"><%= title %></h1>
 
-<%- include('./partials/_hint_messages', { errors }) %>
+    <%- include('./partials/_hint_messages', { errors }) %>
 
-<form
-    action="<%= update ? `/user/${user._id}/update` : '/user/signup' %>"
-    method="POST"
-    class="c-form">
-    <div class="c-form__group">
-        <label for="firstname">First Name</label>
-        <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            value="<%= user ? user.firstname : '' %>"
-            maxlength="100"
-            required>
-    </div>
-    <div class="c-form__group">
-        <label for="lastname">Last Name</label>
-        <input
-            type="text"
-            id="lastname"
-            name="lastname"
-            value="<%= user ? user.lastname : '' %>"
-            maxlength="100"
-            required>
-    </div>
-    <% if (!update) { %>
+    <form
+        action="<%= update ? `/user/${user._id}/update` : '/user/signup' %>"
+        method="POST"
+        class="c-form">
         <div class="c-form__group">
-            <label for="email">Email</label>
+            <label for="firstname">First Name</label>
             <input
-            type="email"
-            id="email"
-            name="email"
-            value="<%= user ? user.email : '' %>"
-            maxlength="100"
-            required>
+                type="text"
+                id="firstname"
+                name="firstname"
+                value="<%= user ? user.firstname : '' %>"
+                maxlength="100"
+                required>
         </div>
-    <% } else { %>
         <div class="c-form__group">
-            <label>Email</label>
-            <p><%= user.email %></p>
+            <label for="lastname">Last Name</label>
+            <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                value="<%= user ? user.lastname : '' %>"
+                maxlength="100"
+                required>
         </div>
-        <input type="hidden" name="userid" value="<%= user._id %>">
-    <% } %>
-    <div class="c-form__group">
-        <label for="password">Password (between 4 and 16 characters)</label>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            required>
-    </div>
-    <div class="c-form__group">
-        <label for="confirmPassword">Confirm Your Password</label>
-        <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            required>
-    </div>
-    <div class="c-form__group">
-        <label for="color">Pick Your Color</label>
-        <input
-            type="color"
-            id="color"
-            name="color"
-            value="<%= user ? user.color : '' %>"
-            required>
-    </div>
-    <div class="c-form__group">
-        <label for="image">Pick Your Avatar</label>
-        <select name="image" id="image" size="0" required>
-            <% if (image_list.length > 0) { %>
-                <% image_list.forEach((image) => { %>
-                    <option
-                        value="<%= image._id %>"
-                        <%= image.selected ? 'selected' : '' %>>
-                            <%= image.file.name %>
-                    </option>
-                <% }) %>
-            <% } %>
-        </select>
-    </div>
+        <% if (!update) { %>
+            <div class="c-form__group">
+                <label for="email">Email</label>
+                <input
+                type="email"
+                id="email"
+                name="email"
+                value="<%= user ? user.email : '' %>"
+                maxlength="100"
+                required>
+            </div>
+        <% } else { %>
+            <div class="c-form__group">
+                <label>Email</label>
+                <p><%= user.email %></p>
+            </div>
+            <input type="hidden" name="userid" value="<%= user._id %>">
+        <% } %>
+        <div class="c-form__group">
+            <label for="password">Password (between 4 and 16 characters)</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                required>
+        </div>
+        <div class="c-form__group">
+            <label for="confirmPassword">Confirm Your Password</label>
+            <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required>
+        </div>
+        <div class="c-form__group">
+            <label for="color">Pick Your Color</label>
+            <input
+                type="color"
+                id="color"
+                name="color"
+                value="<%= user ? user.color : '' %>"
+                required>
+        </div>
+        <div class="c-form__group">
+            <label for="image">Pick Your Avatar</label>
+            <select name="image" id="image" size="0" required>
+                <% if (image_list.length > 0) { %>
+                    <% image_list.forEach((image) => { %>
+                        <option
+                            value="<%= image._id %>"
+                            <%= image.selected ? 'selected' : '' %>>
+                                <%= image.file.name %>
+                        </option>
+                    <% }) %>
+                <% } %>
+            </select>
+        </div>
 
-    <button type="submit"><%= update ? 'Update' : 'Sign Up' %></button>
-</form>
+        <button type="submit" class="c-btn c-btn--submit"><%= update ? 'Update' : 'Sign Up' %></button>
+    </form>
+</div>
 
 <!-- TODO: cleanup error output for production -->
 <% if(errors) { %>

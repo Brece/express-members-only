@@ -949,6 +949,11 @@ p {
     margin-right: 1.25rem;
   }
 
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .sm\:mb-8 {
     margin-bottom: 2rem;
   }
@@ -987,6 +992,10 @@ p {
 
   .sm\:w-32 {
     width: 8rem;
+  }
+
+  .sm\:max-w-md {
+    max-width: 28rem;
   }
 
   .sm\:flex-row {
