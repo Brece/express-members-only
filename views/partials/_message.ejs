@@ -3,10 +3,15 @@
 <% if (message_list.length > 0) { %>
     <% for (const message of message_list) { %>
         <div class="c-message">
+            <% if (user && ((user.status || user.admin) || (user._id.toString() === message.user._id.toString()))) { %>
+                <p><%= message.user.fullname %></p>
+                <p><%= message.createdAt_formatted %></p>
+            <% } else { %>
+                <p>Anonymous User</p>
+                <p>Date: ???</p>
+            <% } %>
             <p><%- message.title %></p>
             <p><%- message.text %></p>
-            <p><%= message.user.fullname %></p>
-            <p><%= message.createdAt_formatted %></p>
 
             <% if (message.user.image.file !== undefined) { %>
                 <img
@@ -16,10 +21,12 @@
                 class="">
             <% } %>
 
-            <form action="/user/<%= message.user._id %>/delete-message" method="POST">
-                <input type="hidden" name="messageid" value="<%= message._id %>">
-                <button type="submit" class="c-btn c-btn--delete">Delete</button>
-            </form>
+            <% if (user && user.admin) { %>
+                <form action="/user/<%= message.user._id %>/delete-message" method="POST">
+                    <input type="hidden" name="messageid" value="<%= message._id %>">
+                    <button type="submit" class="c-btn c-btn--delete">Delete</button>
+                </form>
+            <% } %> 
         </div>
     <% } %> 
 <% } %> 

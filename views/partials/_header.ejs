@@ -10,17 +10,31 @@
     </head>
     <body class="min-h-screen flex flex-col">
 
-        <header class="">
+        <header class="w-screen bg-dark">
             <nav class="">
                 <ul class="flex">
-
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <% if (user) { %>
+                        <li>
+                            <a href="<%= user.url %>">My Profile</a>
+                        </li>
+                        <li>
+                            <a href="<%= user.url %>/status">💎VIP💎</a>
+                        </li>
+                        <li>
+                            <a href="<%= user.url %>/logout" class="c-btn c-btn--submit">Logout</a>
+                        </li>
+                    <% } else { %>
+                        <li>
+                            <a href="/user/login" class="c-btn c-btn--submit">Login</a>
+                        </li>
+                        <li>
+                            <a href="/user/signup" class="c-btn c-btn--submit">Sign Up</a>
+                        </li>
+                    <% } %>
                 </ul>
             </nav>
         </header>
         <div class="o-wrap">
-
-            <% if (user) { %>
-                <a href="/user/<%= user._id %>/logout" class="c-btn c-btn--submit">Logout</a>
-            <% } else { %>
-                <a href="/user/login" class="c-btn c-btn--submit">Login</a>
-            <% } %>

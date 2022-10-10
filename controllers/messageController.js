@@ -1,7 +1,5 @@
 const Message = require('../models/MessageModel');
-const User = require('../models/UserModel');
 
-const async = require('async');
 const { body, validationResult } = require('express-validator');
 
 // getting message list for index page is handled by routing in routes/index.js

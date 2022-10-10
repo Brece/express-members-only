@@ -32,11 +32,10 @@ router.post('/login', passport.authenticate('local', {
 	failureRedirect: '/user/login',
 }));
 router.get('/:id/logout', user_controller.user_logout_get);
-router.get('/:id/status', status_controller.status_update_get);
-router.post('/:id/status', status_controller.status_update_post);
-// TODO: routes for /:id/admin form (same template as for status)
-router.get('/:id/admin', status_controller.admin_update_get);
-router.post('/:id/admin', status_controller.admin_update_post);
+router.get('/:id/status', ensureAuthenticated, status_controller.status_update_get);
+router.post('/:id/status', ensureAuthenticated, status_controller.status_update_post);
+router.get('/:id/admin', ensureAuthenticated, status_controller.admin_update_get);
+router.post('/:id/admin', ensureAuthenticated, status_controller.admin_update_post);
 
 router.get('/:id/update', ensureAuthenticated, user_controller.user_update_get);
 router.post('/:id/update', ensureAuthenticated, user_controller.user_update_post);
@@ -45,9 +44,7 @@ router.post('/:id/delete', ensureAuthenticated, user_controller.user_delete_post
 router.get('/:id', ensureAuthenticated, user_controller.user_detail_get);
 
 // Message
-// TODO: protect routes
 router.post('/create-message', ensureAuthenticated, message_controller.message_create_post);
 router.post('/:id/delete-message', ensureAuthenticated, message_controller.message_delete_post);
-
 
 module.exports = router;

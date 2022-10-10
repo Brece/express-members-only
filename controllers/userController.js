@@ -7,7 +7,6 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 //  User detail
-// TODO: add message list that belongs to the user
 exports.user_detail_get = (req, res, next) => {
     async.parallel(
         {
@@ -17,7 +16,7 @@ exports.user_detail_get = (req, res, next) => {
                     .exec(callback);
             },
             message_list(callback) {
-                Message.find({})
+                Message.find({ user: req.params.id })
                 .sort({ 'createdAt': 'descending' })
                 .populate('user')
                 .exec(callback);
@@ -26,18 +25,15 @@ exports.user_detail_get = (req, res, next) => {
         (err, results) => {
             if (err) return next(err);
 
-            // only display messages that belong to the user
-            let message_list = [];
-            for (const message of results.message_list) {
-                if (req.params.id === message.user._id.toString()) {
-                    message_list.push(message);
-                }
-            }
+            // set user admin status to true in order to able to delete theis own messages on profile page
+            const adminStatus = results.user.admin;
+            results.user.admin = true;
 
             res.render('user_detail', {
                 title: 'My Profile',
                 user: results.user,
-                message_list,
+                message_list: results.message_list,
+                adminStatus,
                 message: false,
                 errors: false,
             });
@@ -60,8 +56,6 @@ exports.user_signup_get = (req, res, next) => {
     });
 }
 
-// TODO: check for color and image id
-// TODO: get rid of database check if email is in use; passport should handle those cases
 exports.user_signup_post = [
     // validation and sanitization
     body('firstname', 'First name is required')
@@ -345,7 +339,7 @@ exports.user_delete_post = [
         .trim()
         .escape()
         .custom((value, { req }) => value === req.body.password),
-    (req, res, next) => {
+    async (req, res, next) => {
         const user = new User({
             _id: req.body.userid,
             url: req.body.url,
@@ -364,7 +358,21 @@ exports.user_delete_post = [
             return;
         }
 
-        // data is valid; delete document
+        // create array of message IDs for deletion
+        const message_list = await Message.find({ user: req.body.userid }, '_id');
+
+        const message_ids = message_list.map((message) => {
+            return message._id.toString();
+        });
+
+        // delete user's messages
+        await Message.deleteMany({
+            _id: {
+                $in: message_ids,
+            }
+        }).exec();
+
+        // delete user
         User.findByIdAndRemove(req.body.userid, (err) => {
             if (err) return next(err);
 
