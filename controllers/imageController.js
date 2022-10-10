@@ -3,6 +3,8 @@ const Image = require('../models/ImageModel');
 exports.image_create_get = (req, res, next) => {
     res.render('image_form', {
         title: 'Image Upload',
+        user: req.user,
+        errors: false,
     });
 }
 
@@ -25,6 +27,6 @@ exports.image_create_post = (req, res, next) => {
             return next(err);
         }
 
-        res.redirect('/image/create');
+        res.redirect('/user/image/create');
     });
 }

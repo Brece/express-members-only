@@ -1,5 +1,6 @@
 <!-- don't render when req.user is undefined; no user logged in-->
 <% if (user) { %>
+    <button class="bg-secondary-dark c-btn c-btn--dropdown">Add Message</button>
     <div class="mb-8 sm:mb-10 md:mb-12 py-4 px-3 sm:px-4 rounded-2xl bg-dark border-2 border-white c-message-form">
         <h2>Add a new message</h2>
         <%- include('_hint_messages') %>
@@ -22,7 +23,7 @@
                 <textarea name="text" id="text" maxlength="499" required><%= message ? message.text : '' %></textarea>
             </div>
             <div class="c-form__group">
-                <button type="submit" class="c-btn c-btn--submit">Add Message</button>
+                <button type="submit" class="c-btn c-btn--submit">Submit</button>
             </div>
         </form>
     </div>

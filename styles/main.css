@@ -70,9 +70,11 @@ p {
 .c-btn {
     display: inline-block;
     margin-right: 20px;
+    margin-bottom: 20px;
     cursor: pointer;
     border: none;
     padding: 10px 20px;
+    border: 1px solid #ffffff;
     border-radius: 5px;
     color: #ffffff;
     font-size: 14px;
@@ -122,6 +124,17 @@ p {
 }
 .c-form__group textarea {
     height: 100px;
+}
+
+.c-message-form {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all .1s linear;
+}
+.c-message-form.isVisible {
+    opacity: 1;
+    height: auto;
 }
 
 /* =================== MEDIA QUERIES ===================== */

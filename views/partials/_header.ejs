@@ -36,13 +36,13 @@
                     </li>
                     <% if (user) { %>
                         <li class="w-1/4 inline-block">
-                            <a href="<%= user.url %>" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Account</a>
+                            <a href="/user/<%= user._id %>" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Account</a>
                         </li>
                         <li class="w-1/4 inline-block">
-                            <a href="<%= user.url %>/status" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">VIP</a>
+                            <a href="/user/<%= user._id %>/status" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">VIP</a>
                         </li>
                         <li class="w-1/6 inline-block lg:w-1/6">
-                            <a href="<%= user.url %>/logout" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold"><i class="fa-solid fa-right-from-bracket"></i></a>
+                            <a href="/user/<%= user._id %>/logout" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold"><i class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
                     <% } else { %>
                         <li class="w-1/4 inline-block md:w-1/6 mr-2 ml-auto sm:mr-0">

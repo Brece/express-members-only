@@ -622,6 +622,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -683,6 +687,14 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
+.\!flex-row {
+  flex-direction: row !important;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -733,9 +745,9 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-danger {
+.bg-danger-light {
   --tw-bg-opacity: 1;
-  background-color: rgb(230 87 92 / var(--tw-bg-opacity));
+  background-color: rgb(241 152 155 / var(--tw-bg-opacity));
 }
 
 .bg-success {
@@ -748,9 +760,9 @@ video {
   background-color: rgb(71 69 85 / var(--tw-bg-opacity));
 }
 
-.bg-danger-light {
+.bg-secondary-dark {
   --tw-bg-opacity: 1;
-  background-color: rgb(241 152 155 / var(--tw-bg-opacity));
+  background-color: rgb(62 0 58 / var(--tw-bg-opacity));
 }
 
 .py-5 {
@@ -934,9 +946,11 @@ p {
 .c-btn {
   display: inline-block;
   margin-right: 20px;
+  margin-bottom: 20px;
   cursor: pointer;
   border: none;
   padding: 10px 20px;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   color: #ffffff;
   font-size: 14px;
@@ -994,6 +1008,18 @@ p {
 
 .c-form__group textarea {
   height: 100px;
+}
+
+.c-message-form {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all .1s linear;
+}
+
+.c-message-form.isVisible {
+  opacity: 1;
+  height: auto;
 }
 
 /* =================== MEDIA QUERIES ===================== */

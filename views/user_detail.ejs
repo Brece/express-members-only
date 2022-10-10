@@ -9,11 +9,12 @@
             <p><strong>Status:</strong> <%= user.status ? 'VIP' : 'Standard' %></p>
             <p><strong>Admin:</strong> <%= adminStatus ? 'Yes' : 'No' %></p>
             <p><strong>Color:</strong> <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
-            <div>
+            <div class="mt-5">
             <% if (!adminStatus) { %>
                 <a href="<%= user.url %>/admin" class="c-btn c-btn--update">Become an Admin</a>
             <% } %>
                 <a href="<%= user.url %>/update" class="c-btn c-btn--update">Update Account</a>
+                <a href="<%= user.url %>/delete" class="c-btn c-btn--delete">Delete Account</a>
             </div>
 
         </div>
