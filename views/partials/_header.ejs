@@ -10,31 +10,48 @@
     </head>
     <body class="min-h-screen flex flex-col">
 
-        <header class="w-screen bg-dark mb-10 lg:mb-20 sm:mb-14">
+        <header
+            class="w-screen bg-transparent mb-10 lg:mb-20 sm:mb-14 border-b-2 border-white tracking-widest"
+            <%- `style="text-shadow:
+                0 0 3px #fff,
+                0 0 6px #fff,
+                0 0 17px #fff,
+                0 0 28px #fff,
+                0 0 32px #fff,
+                0 0 56px #fff,
+                0 0 72px #fff,
+                0 0 90px #fff;
+                box-shadow:
+                0 0 3px #fff,
+                0 0 3px #fff,
+                0 0 32px #fff,
+                0 0 13px #fff,
+                0 0 45px #fff,
+                inset 0 0 20px #fff"` %>>
             <nav class=" my-0 mx-auto lg:max-w-4xl text-center">
                 <ul class="text-white font-bold">
                     <li class="w-1/4 inline-block">
-                        <a href="/" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Home</a>
+                        <a href="/" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Home</a>
                     </li>
                     <% if (user) { %>
                         <li class="w-1/4 inline-block">
-                            <a href="<%= user.url %>" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Account</a>
+                            <a href="<%= user.url %>" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Account</a>
                         </li>
                         <li class="w-1/4 inline-block">
-                            <a href="<%= user.url %>/status" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">VIP</a>
+                            <a href="<%= user.url %>/status" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">VIP</a>
                         </li>
                         <li class="w-1/6 inline-block lg:w-1/6">
-                            <a href="<%= user.url %>/logout" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold"><i class="fa-solid fa-right-from-bracket"></i></a>
+                            <a href="<%= user.url %>/logout" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold"><i class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
                     <% } else { %>
                         <li class="w-1/4 inline-block md:w-1/6 mr-2 ml-auto sm:mr-0">
-                            <a href="/user/login" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Login</a>
+                            <a href="/user/login" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Login</a>
                         </li>
                         <li class="w-1/4 inline-block lg:w-1/6 mr-2 sm:mr-0">
-                            <a href="/user/signup" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Sign Up</a>
+                            <a href="/user/signup" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-secondary font-semibold">Sign Up</a>
                         </li>
                     <% } %>
                 </ul>
             </nav>
         </header>
-        <div class="o-wrap">
+        <div class="mb-10 lg:w-full lg:max-w-4xl lg:mx-auto lg:my-0 mx-3 sm:mx-5 md:mx-10 o-wrap">

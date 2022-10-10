@@ -11,6 +11,53 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+body {
+    color: white;
+    background: #00e5af; /* Old browsers */
+    background: -moz-linear-gradient(top,  #00e5af 0%, #db61ce 19%, #3e003a 40%, #000000 87%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #00e5af 0%,#db61ce 19%,#3e003a 40%,#000000 87%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #00e5af 0%,#db61ce 19%,#3e003a 40%,#000000 87%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e5af', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+
+}
+h3 {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/*
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+        0 0 4px #e6575c,
+        0 0 11px #e6575c,
+        0 0 19px #e6575c,
+        0 0 40px #fc373d,
+        0 0 80px #fc373d,
+        0 0 90px #fc373d,
+        0 0 100px #fc373d,
+        0 0 150px #fc373d;
+    }
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }    
+}
+
+.c-error h1 {
+    color: #e6575c;
+    text-shadow:
+        0 0 7px #e6575c,
+        0 0 10px #e6575c,
+        0 0 21px #e6575c,
+        0 0 42px #fc373d,
+        0 0 82px #fc373d,
+        0 0 92px #fc373d,
+        0 0 102px #fc373d,
+        0 0 151px #fc373d;
+    animation: flicker 1.5s infinite alternate;
+}
+*/
 
 .c-btn {
     margin-right: 20px;
@@ -75,4 +122,10 @@
     outline: 1px solid #828282;
     border-radius: 3px;
     background-color: #ffffff;
+}
+
+@media screen and (prefers-reduced-motion) { 
+    h1 {
+        animation: none;
+    }
 }
