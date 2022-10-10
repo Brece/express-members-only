@@ -1,7 +1,7 @@
 <!-- don't render when req.user is undefined; no user logged in-->
 <% if (user) { %>
-    <div class="c-message-form">
-        <h1><%= title %></h1>
+    <div class="mb-8 sm:mb-10 md:mb-12 py-4 px-3 sm:px-4 rounded-2xl bg-dark border-2 border-white c-message-form">
+        <h2>Add a new message</h2>
         <%- include('_hint_messages') %>
 
         <form

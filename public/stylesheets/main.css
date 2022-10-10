@@ -697,14 +697,9 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 229 175 / var(--tw-bg-opacity));
-}
-
 .bg-dark {
   --tw-bg-opacity: 1;
-  background-color: rgb(60 72 86 / var(--tw-bg-opacity));
+  background-color: rgb(71 69 85 / var(--tw-bg-opacity));
 }
 
 .py-5 {
@@ -757,10 +752,6 @@ video {
   font-weight: 600;
 }
 
-.tracking-wider {
-  letter-spacing: 0.05em;
-}
-
 .tracking-widest {
   letter-spacing: 0.1em;
 }
@@ -800,6 +791,12 @@ body {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e5af', endColorstr='#000000',GradientType=0 );
   /* IE6-9 */
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 h3 {
@@ -907,10 +904,16 @@ h3 {
 .c-form__group input[type=password],
 .c-form__group select,
 .c-form__group textarea {
-  padding: 0.25rem;
+  width: 100%;
+  padding: 4px;
   outline: 1px solid #828282;
   border-radius: 3px;
   background-color: #ffffff;
+  color: #000000;
+}
+
+.c-form__group textarea {
+  height: 100px;
 }
 
 @media screen and (prefers-reduced-motion) {
@@ -920,19 +923,9 @@ h3 {
   }
 }
 
-.hover\:text-primary:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 229 175 / var(--tw-text-opacity));
-}
-
 .hover\:text-secondary:hover {
   --tw-text-opacity: 1;
   color: rgb(219 97 206 / var(--tw-text-opacity));
-}
-
-.hover\:text-secondary-dark:hover {
-  --tw-text-opacity: 1;
-  color: rgb(62 0 58 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
