@@ -23,10 +23,5 @@ UserSchema
     .get(function() {
         return `/user/${ this._id }`;
     });
-UserSchema
-    .virtual('access')
-    .get(function() {
-        return !this.admin;
-    });
 
 module.exports = mongoose.model('User', UserSchema);

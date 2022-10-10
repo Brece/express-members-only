@@ -10,28 +10,28 @@
     </head>
     <body class="min-h-screen flex flex-col">
 
-        <header class="w-screen bg-dark">
-            <nav class="">
-                <ul class="flex">
-                    <li>
-                        <a href="/">Home</a>
+        <header class="w-screen bg-dark mb-10 lg:mb-20 sm:mb-14">
+            <nav class=" my-0 mx-auto lg:max-w-4xl text-center">
+                <ul class="text-white font-bold">
+                    <li class="w-1/4 inline-block">
+                        <a href="/" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Home</a>
                     </li>
                     <% if (user) { %>
-                        <li>
-                            <a href="<%= user.url %>">My Profile</a>
+                        <li class="w-1/4 inline-block">
+                            <a href="<%= user.url %>" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Account</a>
                         </li>
-                        <li>
-                            <a href="<%= user.url %>/status">💎VIP💎</a>
+                        <li class="w-1/4 inline-block">
+                            <a href="<%= user.url %>/status" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">VIP</a>
                         </li>
-                        <li>
-                            <a href="<%= user.url %>/logout" class="c-btn c-btn--submit">Logout</a>
+                        <li class="w-1/6 inline-block lg:w-1/6">
+                            <a href="<%= user.url %>/logout" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold"><i class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
                     <% } else { %>
-                        <li>
-                            <a href="/user/login" class="c-btn c-btn--submit">Login</a>
+                        <li class="w-1/4 inline-block md:w-1/6 mr-2 ml-auto sm:mr-0">
+                            <a href="/user/login" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Login</a>
                         </li>
-                        <li>
-                            <a href="/user/signup" class="c-btn c-btn--submit">Sign Up</a>
+                        <li class="w-1/4 inline-block lg:w-1/6 mr-2 sm:mr-0">
+                            <a href="/user/signup" class="inline-block w-full py-3 sm:py-4 md:py-5 md:w-36 duration-100 hover:text-primary font-semibold">Sign Up</a>
                         </li>
                     <% } %>
                 </ul>
