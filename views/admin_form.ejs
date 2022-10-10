@@ -1,17 +1,19 @@
 <%- include('./partials/_header') %>
 
-<h1>Become an Admin</h1>
-<form
-    action="/user/<%= user._id %>/admin"
-    method="POST"
-    class="c-form">
-    <input type="hidden" name="userid" value="<%= user._id %>">
-    <div class="c-form__group">
-        <label for="status">Admin Password</label>
-        <input type="text" id="status" name="status" placeholder="It's a secret!">
-    </div>
-    <button type="submit" class="c-btn c-btn--submit">Submit</button>
-</form>
+<div class="w-full sm:max-w-md sm:mx-auto c-user-form">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl mb-5 sm:mb-8 md:mb-10 font-bold">Become an Admin</h1>
+    <form
+        action="/user/<%= user._id %>/admin"
+        method="POST"
+        class="c-form">
+        <input type="hidden" name="userid" value="<%= user._id %>">
+        <div class="c-form__group">
+            <label for="status">Admin Password</label>
+            <input type="text" id="status" name="status" placeholder="It's a secret!">
+        </div>
+        <button type="submit" class="c-btn c-btn--submit">Submit</button>
+    </form>
+</div>
 
 <% if(errors) { %>
     <div class="c-errors">

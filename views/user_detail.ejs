@@ -9,9 +9,13 @@
             <p><strong>Status:</strong> <%= user.status ? 'VIP' : 'Standard' %></p>
             <p><strong>Admin:</strong> <%= adminStatus ? 'Yes' : 'No' %></p>
             <p><strong>Color:</strong> <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
+            <div>
             <% if (!adminStatus) { %>
                 <a href="<%= user.url %>/admin" class="c-btn c-btn--update">Become an Admin</a>
             <% } %>
+                <a href="<%= user.url %>/update" class="c-btn c-btn--update">Update Account</a>
+            </div>
+
         </div>
 
         <div class="w-full sm:w-2/5 mb-5 sm:text-right">
