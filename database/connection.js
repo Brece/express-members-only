@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 /**
  * @params dev_db_url: set up your MongoDB database connection string
  */
-// const dev_db_url = '';
-// const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const dev_db_url = 'mongodb+srv://user:user123@cluster0.ayay7nr.mongodb.net/members_only?retryWrites=true&w=majority';
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
-const mongoDB = process.env.MONGODB_URI;
+// const mongoDB = process.env.MONGODB_URI;
 
 const connectDB = async() => {
     try {
