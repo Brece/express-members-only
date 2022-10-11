@@ -19,8 +19,8 @@ const status_controller = require('../controllers/statusController');
 
 // API
 // Image
-router.get('/image/create', ensureAuthenticated, image_controller.image_create_get);
-router.post('/image/create', ensureAuthenticated, upload.single('image'),image_controller.image_create_post);
+// router.get('/image/create', ensureAuthenticated, image_controller.image_create_get);
+// router.post('/image/create', ensureAuthenticated, upload.single('image'),image_controller.image_create_post);
 
 // User
 router.get('/signup', user_controller.user_signup_get);
