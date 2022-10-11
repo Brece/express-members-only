@@ -11,7 +11,6 @@ const upload = multer({
 const passport = require('passport');
 const { ensureAuthenticated } = require('../config/auth');
 
-// TODO:
 // import controller modules
 const user_controller = require('../controllers/userController');
 const image_controller = require('../controllers/imageController');
@@ -30,8 +29,9 @@ router.get('/login', user_controller.user_login_get);
 router.post('/login', passport.authenticate('local', {
 	successRedirect: '/',
 	failureRedirect: '/user/login',
+	failureMessage: true,
 }));
-router.get('/:id/logout', user_controller.user_logout_get);
+router.get('/:id/logout', ensureAuthenticated, user_controller.user_logout_get);
 router.get('/:id/status', ensureAuthenticated, status_controller.status_update_get);
 router.post('/:id/status', ensureAuthenticated, status_controller.status_update_post);
 router.get('/:id/admin', ensureAuthenticated, status_controller.admin_update_get);

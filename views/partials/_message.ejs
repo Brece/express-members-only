@@ -2,7 +2,7 @@
     <div class="c-message">
         <% for (const message of message_list) { %>
             <div
-                class="c-message_item mb-8 sm:mb-10 md:mb-12 py-4 px-3 sm:px-4 rounded-2xl bg-dark border-2 border-white"
+                class="c-message_item mb-8 sm:mb-10 md:mb-12 py-4 px-3 sm:px-4 rounded-2xl bg-dark border-2 border-white duration-100 hover:scale-105"
                 <%- `style="box-shadow:
                 0 0 3px #fff,
                 0 0 3px #fff,
@@ -13,7 +13,7 @@
                 <div class="w-full relative mb-3 sm:mb-4 md:mb-5">
                     <% if (user && ((user.status || user.admin) || (user._id.toString() === message.user._id.toString()))) { %>
                         <p
-                            class="inline-block text-white font-semibold"
+                            class="inline-block !mb-0 text-white font-semibold"
                             <%- `style="text-shadow:
                             0 0 3px #fff,
                             0 0 6px #fff,
@@ -26,14 +26,14 @@
                         </p>
                         <p class="inline-block absolute right-0 top-1/2 -translate-y-1/2 text-sm"><%= message.createdAt_formatted %></p>
                     <% } else { %>
-                        <p class="inline-block text-white font-semibold">Anonymous User</p>
+                        <p class="inline-block !mb-0 text-white font-semibold">Anonymous User</p>
                         <p class="inline-block absolute right-0 top-1/2 -translate-y-1/2 text-sm">Date: ???</p>
                     <% } %>
                 </div>
 
                 <div class="w-full flex flex-col sm:flex-row mb-5">
                     <% if (message.user.image.file !== undefined) { %>
-                        <div class="w-1/3 mb-3 sm:mb-0">
+                        <div class="w-1/4 mb-3 sm:mb-0">
                             <img
                             src="data:<%= message.user.image.file.contentType %>;base64,
                             <%= message.user.image.file.data.toString('base64') %>"

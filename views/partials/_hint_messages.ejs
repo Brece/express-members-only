@@ -19,3 +19,14 @@
         </div>
     <% } %>
 <% } %>
+
+<% if (login_errors) { %>
+    <% for (const error of login_errors) { %>
+        <div class="mb-1 px-1 py-1 bg-danger-light c-hint-message rounded relative c-hint-message">
+            <p class="mb-0 pl-2 pr-10 py-2 text-black"><%= error %></p>
+            <button type="button" class="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 c-hint-message__close">
+                <i class="fa-solid fa-xmark text-2xl text-danger-dark"></i>
+            </button>
+        </div>
+    <% } %>
+<% } %>

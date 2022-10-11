@@ -5,6 +5,7 @@ exports.image_create_get = (req, res, next) => {
         title: 'Image Upload',
         user: req.user,
         errors: false,
+        login_errors: false,
     });
 }
 

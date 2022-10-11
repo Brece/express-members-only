@@ -11,15 +11,15 @@
             <p><strong>Color:</strong> <span <%- `style="background-color: ${user.color}"` %>><%= user.color %></span></p>
             <div class="mt-5">
             <% if (!adminStatus) { %>
-                <a href="<%= user.url %>/admin" class="c-btn c-btn--update">Become an Admin</a>
+                <a href="<%= user.url %>/admin" class="c-btn c-btn--submit">Become an Admin</a>
             <% } %>
-                <a href="<%= user.url %>/update" class="c-btn c-btn--update">Update Account</a>
+                <a href="<%= user.url %>/update" class="c-btn c-btn--submit">Update Account</a>
                 <a href="<%= user.url %>/delete" class="c-btn c-btn--delete">Delete Account</a>
             </div>
 
         </div>
 
-        <div class="w-full sm:w-2/5 mb-5 sm:text-right">
+        <div class="w-full sm:w-2/5 mb-5 sm:text-right self-start">
             <img
                 src="data:<%= user.image.file.contentType %>;base64,
                 <%= user.image.file.data.toString('base64') %>"

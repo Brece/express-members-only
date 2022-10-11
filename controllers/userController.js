@@ -36,6 +36,7 @@ exports.user_detail_get = (req, res, next) => {
                 adminStatus,
                 message: false,
                 errors: false,
+                login_errors: false,
             });
         }
     );
@@ -52,6 +53,7 @@ exports.user_signup_get = (req, res, next) => {
             image_list,
             errors: false,
             update: false,
+            login_errors: false,
         });
     });
 }
@@ -121,6 +123,7 @@ exports.user_signup_post = [
                     image_list,
                     errors: errors.array(),
                     update: false,
+                    login_errors: false,
                 });
             });
             return;
@@ -136,6 +139,7 @@ exports.user_signup_post = [
             user.save((err) => {
                 if (err) return next(err);
                 
+                req.session.messages = [];
                 req.flash('success_msg', 'You are now registered and can log in');
                 res.redirect('/user/login');
             });
@@ -179,6 +183,7 @@ exports.user_update_get = (req, res, next) => {
                 image_list: results.list_images,
                 errors: false,
                 update: true,
+                login_errors: false,
             });
         }
     );
@@ -246,6 +251,7 @@ exports.user_update_post = [
                         image_list: results.list_images,
                         errors: errors.array(),
                         update: true,
+                        login_errors: false,
                     });
                 }
             );
@@ -294,6 +300,7 @@ exports.user_delete_get = (req, res, next) => {
                 title: 'Delete Account',
                 user,
                 errors: false,
+                login_errors: false,
         });
     });
 }
@@ -353,6 +360,7 @@ exports.user_delete_post = [
             res.render('delete_form', {
                 title: 'Delete Account',
                 errors: errors.array(),
+                login_errors: false,
                 user,
             });
             return;
@@ -389,10 +397,12 @@ exports.user_delete_post = [
 
 // LOG IN
 exports.user_login_get = (req, res, next) => {
+    console.log(req.session.messages);
     res.render('login_form', {
         title: 'Log In',
         user: false,
         errors: false,
+        login_errors: req.session.messages,
     });
 }
 

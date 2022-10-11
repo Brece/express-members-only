@@ -25,6 +25,7 @@ function formGET(template) {
                     res.render(template, {
                         user,
                         errors: false,
+                        login_errors: false,
                     });
                 });
         }
@@ -49,6 +50,7 @@ function formPOST(password, template, documentField) {
                             _id: req.body.userid,
                         },
                         errors: errors.array(),
+                        login_errors: false,
                     });
                     return;
                 }

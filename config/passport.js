@@ -10,12 +10,17 @@ module.exports = (passport) => {
         new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
+            passReqToCallback: true,
             },
-            (email, password, done) => {
+            (req, email, password, done) => {
             User.findOne({ email: email }, (err, user) => {
                 if (err) {
                     return done(err);
                 }
+                
+                // clear old failure messages
+                req.session.messages = [];
+                
                 if (!user) {
                     return done(null, false, { message: 'Email incorrect' });
                 }

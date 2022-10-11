@@ -35,6 +35,7 @@ router.get('/', (req, res, next) => {
                 message_list: results.message_list,
                 message: false,
                 errors: false,
+                login_errors: false,
             });
         }
     )
