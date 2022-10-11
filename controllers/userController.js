@@ -397,7 +397,6 @@ exports.user_delete_post = [
 
 // LOG IN
 exports.user_login_get = (req, res, next) => {
-    console.log(req.session.messages);
     res.render('login_form', {
         title: 'Log In',
         user: false,
