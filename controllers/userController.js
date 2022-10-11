@@ -11,12 +11,12 @@ exports.user_detail_get = (req, res, next) => {
     async.parallel(
         {
             user(callback) {
-                User.findById(req.params.id)
+                User.findById(req.user._id)
                     .populate('image')
                     .exec(callback);
             },
             message_list(callback) {
-                Message.find({ user: req.params.id })
+                Message.find({ user: req.user._id })
                 .sort({ 'createdAt': 'descending' })
                 .populate('user')
                 .exec(callback);
@@ -152,7 +152,7 @@ exports.user_update_get = (req, res, next) => {
     async.parallel(
         {
             user(callback) {
-                User.findById(req.params.id)
+                User.findById(req.user._id)
                     .populate('image')
                     .exec(callback);
             },
@@ -286,7 +286,7 @@ exports.user_update_post = [
 
 // DELETE
 exports.user_delete_get = (req, res, next) => {
-    User.findById(req.params.id)
+    User.findById(req.user._id)
         .exec((err, user) => {
             if (err) return next(err);
 

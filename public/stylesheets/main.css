@@ -949,7 +949,7 @@ p {
   }
 }
 
-.c-error h1 {
+.c-error h1, footer p {
   color: #ffffff;
   text-shadow:
         0 0 7px #ffffff,

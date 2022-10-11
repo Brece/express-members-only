@@ -12,7 +12,7 @@ exports.admin_update_post = formPOST('admin', 'admin_form', 'admin');
 function formGET(template) {
     return (
         (req, res, next) => {
-            User.findById(req.params.id)
+            User.findById(req.user._id)
                 .exec((err, user) => {
                     if (err) return next(err);
         
