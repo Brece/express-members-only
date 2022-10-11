@@ -18,16 +18,4 @@
     </form>
 </div>
 
-<% if(errors) { %>
-    <div class="c-errors">
-        <% errors.forEach(function (err, index) { %>
-            <div>
-                <h4>Error #<%= index + 1 %></h4>
-                <p>Error Message: <%= err.msg %></p>
-                <p>Parameter: <%= err.param %></p>
-            </div>
-        <% }) %> 
-    </div>
-<% } %> 
-
 <%- include('./partials/_footer') %>
