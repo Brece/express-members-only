@@ -1,4 +1,8 @@
 # Members Only
+![Project Preview](/public/images/express-members-only.png)
+[**LIVE version**](https://express-members-only.onrender.com)
+
+
 This project is part of [TheOdinProject](https://www.theodinproject.com/lessons/nodejs-members-only). The goal is to learn more about the backend and how user authentication works with user accounts that have different permissions.
 
 To achieve this I used **NodeJS** and **Express** for the backend, **MongoDB (NoSQL)** for the database, **EJS** as the view engine and **TailwindCSS** to display the content in the frontend. For authentication I used **PassportJS** with **"Local" strategy**.
@@ -10,7 +14,6 @@ This **CRUD** application mimics a messaging app with a *Cyberpunk Theme* with d
 - Logged in user that have the status "VIP" or are "Admin" can see who wrote the message and when. Furthermore admins can delete all messages.
 - Routes that require a logged in user are protected by authentication.
 
-**LIVE version** [here](https://express-members-only-odin.herokuapp.com/)
 
 Please add your own database connection string and environment secrets in the **env** file and rename it to *.env*.
 
